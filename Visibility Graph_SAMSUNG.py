@@ -53,6 +53,13 @@ xValues = np.log(list(degree_distribution.keys()))
 yValues = np.log(list(degree_distribution.values()))
 #print(xValues, yValues)
 
+slope, intercept = np.polyfit(xValues, yValues, 1)
+abline_values = [slope * i + intercept for i in xValues]
+
 plt.scatter(xValues, yValues, 1.5)
+plt.plot(xValues, abline_values, 'b')
 plt.xlabel("k")
 plt.ylabel("P(k)")
+plt.legend()
+plt.title('intercepts {} {}'.format(slope, intercept))
+print(slope, intercept)
