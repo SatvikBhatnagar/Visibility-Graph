@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 
 from visibility_graph import visibility_graph
 
-ds_btc = pd.read_csv('Q:/Non Linear Dynamics/Visibility Graph/Stock Prices/XRP-USD 1-01-2020 -- 31-12-2021.csv')
+ds_btc = pd.read_csv('Q:/Non Linear Dynamics/Visibility Graph/Stock Prices/XRP-USD 1-01-2017 -- 12-04-2022.csv')
 
 #btc_close = ds_btc.loc[:, ['Date', 'Close']]
 btc_close = ds_btc['Close']
@@ -60,6 +60,13 @@ xValues = np.log(list(degree_distribution.keys()))
 yValues = np.log(list(degree_distribution.values()))
 #print(xValues, yValues)
 
+slope, intercept = np.polyfit(xValues, yValues, 1)
+abline_values = [slope * i + intercept for i in xValues]
+
 plt.scatter(xValues, yValues, 1.5)
+plt.plot(xValues, abline_values, 'b')
 plt.xlabel("k")
 plt.ylabel("P(k)")
+plt.legend()
+plt.title('XRP: intercepts {} {}'.format(slope, intercept))
+print(slope, intercept)
